@@ -14,7 +14,7 @@ const Hero = lazy(() => import('../components/Hero'))
 const Home = () => {
   return (
     <div className="">
-      <Suspense fallback={<div className="text-center py-16">Loading hero...</div>}>
+      <Suspense fallback={null}>
         <Hero />
       </Suspense>
       <Earlyaccess />
