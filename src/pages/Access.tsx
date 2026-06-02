@@ -1,16 +1,43 @@
 import React from 'react'
 import { IoMdArrowBack } from "react-icons/io";
-
+import { supabase } from '@/lib/supabaseClient'
 
 const Access = () => {
   const [email, setEmail] = React.useState("");
   const [userType, setUserType] = React.useState("user");
+  const [status, setStatus] = React.useState<string | null>(null)
+  const [loading, setLoading] = React.useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission
-    console.log({ email, userType });
-  };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setStatus(null)
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!email || !emailRegex.test(email)) {
+      setStatus('Please enter a valid email address.')
+      return
+    }
+
+    setLoading(true)
+
+    const { error } = await supabase.from('early_access').insert([
+      {
+        email,
+        user_type: userType,
+      },
+    ])
+
+    setLoading(false)
+
+    if (error) {
+      setStatus(`Submission failed: ${error.message}`)
+      return
+    }
+
+    setStatus('Thank you! Your access request has been submitted.')
+    setEmail('')
+    setUserType('user')
+  }
 
   return (
     <section className="overflow-hidden text-[#18181B] mb-16">
@@ -57,6 +84,7 @@ Request access for your team below.
               <input
                 type="email"
                 value={email}
+                required
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="yourdomain.com"
                 className="w-full border border-[#E4E4E7] rounded-[8px] px-4 py-3 text-[13px] text-[#18181B] placeholder-[#B4B4B8] focus:outline-none focus:border-[#18181B] transition"
@@ -97,10 +125,17 @@ Request access for your team below.
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-[#000000] text-white rounded-[8px] py-3 px-4 text-[10px] font-jetbrains uppercase tracking-[1px] hover:bg-[#18181B] transition mb-4"
+              disabled={loading}
+              className="w-full bg-[#000000] text-white rounded-[8px] py-3 px-4 text-[10px] font-jetbrains uppercase tracking-[1px] hover:bg-[#18181B] transition mb-4 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              Request Early Access
+              {loading ? 'Sending...' : 'Request Early Access'}
             </button>
+
+            {status && (
+              <p className="text-[11px] text-[#18181B] mb-4">
+                {status}
+              </p>
+            )}
 
             {/* Disclaimer */}
             <p className="font-jetbrains text-[9px] text-[#B4B4B8] tracking-[1px] uppercase">

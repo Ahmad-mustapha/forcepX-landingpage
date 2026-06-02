@@ -1,7 +1,6 @@
 export { default as Architecture } from './Architecture'
 export { default as Earlyaccess } from './Earlyaccess'
 export { default as Footer } from './Footer'
-export { default as Hero } from './Hero'
 export { default as Navbar } from './Navbar'
 export { default as Problem } from './Problem'
 export { default as Secure } from './Secure'

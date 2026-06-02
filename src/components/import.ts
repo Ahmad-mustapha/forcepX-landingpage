@@ -1,1 +1,1 @@
-export { Architecture, Earlyaccess, Footer, Hero, Navbar, Problem, Secure, Solution, Tamper, Vision } from './index'
+export { Architecture, Earlyaccess, Footer, Navbar, Problem, Secure, Solution, Tamper, Vision } from './index'

@@ -1,7 +1,7 @@
+import { Suspense, lazy } from 'react'
 import {
   Architecture,
   Earlyaccess,
-  Hero,
   Problem,
   Secure,
   Solution,
@@ -9,10 +9,14 @@ import {
   Vision,
 } from '../components/import'
 
+const Hero = lazy(() => import('../components/Hero'))
+
 const Home = () => {
   return (
     <div className="">
-      <Hero />
+      <Suspense fallback={<div className="text-center py-16">Loading hero...</div>}>
+        <Hero />
+      </Suspense>
       <Earlyaccess />
       <Problem />
       <Tamper />
