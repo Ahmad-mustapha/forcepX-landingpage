@@ -1,3 +1,5 @@
+import { FaTwitter, FaInstagram } from 'react-icons/fa'
+
 const footerItems = ['terms', 'Privacy Protocol', 'Legal']
 
 const Footer = () => {
@@ -26,7 +28,28 @@ const Footer = () => {
           </nav>
         </div>
 
-        <div className="w-full md:w-auto flex justify-center md:justify-end">
+        <div className="w-full md:w-auto flex justify-center md:justify-end items-center gap-4">
+          <div className="flex items-center gap-3 mr-3">
+            <a
+              href="https://x.com/forcep_x"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="X / Twitter"
+              className="text-[#71717B] hover:text-[#18181B] transition text-[18px]"
+            >
+              <FaTwitter />
+            </a>
+            <a
+              href="https://www.instagram.com/forcep_x?igsh=MWxhMnB2MXY4ZWE2aA=="
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              className="text-[#71717B] hover:text-[#18181B] transition text-[18px]"
+            >
+              <FaInstagram />
+            </a>
+          </div>
+
           <span
             className="rounded-full border-1 border-white bg-white/5 px-5 py-2 text-[10px] text-[#71717B] transition hover:bg-white/10"
           >
